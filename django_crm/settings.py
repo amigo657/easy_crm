@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     "website",
+    "sales_history"
 ]
 
 MIDDLEWARE = [
@@ -73,9 +74,9 @@ WSGI_APPLICATION = "django_crm.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'crm_db', 
-        'USER': 'postgres',
-        'PASSWORD': 'password123',
+        'NAME': 'crm2', 
+        'USER': 'crm_user2',
+        'PASSWORD': '123456789',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }

@@ -42,10 +42,10 @@ def register_user(request):
             password = form.cleaned_data["password1"]
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, "You've been registered in")
+            messages.success(request, "Вы зарегестрировались")
             return redirect("home")
         else:
-            messages.error(request, "An error occured during registration")
+            messages.error(request, "Возникла ошибка. Попробуйте еще раз")
 
     return render(request, "register.html", {"form": form})
 
@@ -55,7 +55,7 @@ def record(request, pk):
         record = Record.objects.get(id=pk)
         return render(request, "record.html", {"record": record})
     else:
-        messages.error(request, "You have to login")
+        messages.error(request, "Вы вошли в аккаунт")
         return redirect("home")
 
 
@@ -63,10 +63,10 @@ def delete_record(request, pk):
     if request.user.is_authenticated:
         del_record = Record.objects.get(id=pk)
         del_record.delete()
-        messages.success(request, "You deleted the record")
+        messages.success(request, "Вы удалили запись")
         return redirect("home")
     else:
-        messages.error(request, "You have to login")
+        messages.error(request, "Вы не являетесь админом")
         return redirect("home")
 
 
@@ -75,7 +75,7 @@ def add_record(request):
     if request.user.is_authenticated:
         if form.is_valid():
             add_record = form.save()
-            messages.success(request, f"Record {add_record.first_name} was added")
+            messages.success(request, f"Запись {add_record.first_name} была добавлена")
             return redirect("home")
         return render(request, "add_record.html", {"form": form})
     else:
@@ -89,7 +89,7 @@ def update_record(request, pk):
         form = AddRecordForm(request.POST or None, instance=record)
         if form.is_valid():
             updated_record = form.save()
-            messages.success(request, f"Record '{updated_record.first_name}' was added")
+            messages.success(request, f"Запись '{updated_record.first_name}' была обновлена")
             return redirect("home")
         return render(request, "update_record.html", {"form": form})
     else:

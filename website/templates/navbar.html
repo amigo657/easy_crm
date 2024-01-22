@@ -10,7 +10,10 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item">
-            <a class="nav-link"  href="{% url 'add_record'%}">Add new record</a>
+            <a class="nav-link"  href="{% url 'add_client'%}">Добавить нового пользователя</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="{% url 'view_history'%}">История продаж</a>
           </li>
           <li class="nav-item">
             <a class="nav-link"  href="{% url 'logout'%}">Logout</a>

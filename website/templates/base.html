@@ -21,11 +21,13 @@
         {% endfor %}
         {% endif %}
     </div>
-
+    
     <div class="container">
         <br>
     {% block content %}
-      
+    {% block history %}
+
+    {% endblock history %}
     {% endblock content %}
     </div>
 

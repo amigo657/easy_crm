@@ -7,16 +7,16 @@
       <h5 class="card-title">{{ record.first_name }} {{ record.last_name }}</h5>
       <p class="card-text"><strong>ID: </strong> {{ record.id }}</p>
       <p class="card-text"><strong>Email: </strong> {{ record.email }}</p>
-      <p class="card-text"><strong>Address: </strong> {{ record.address }}</p>
-      <p class="card-text"><strong>Region: </strong> {{ record.region }}</p>
-      <p class="card-text"><strong>City: </strong> {{ record.city }}</p>
-      <p class="card-text"><strong>Zipcode: </strong> {{ record.zipcode }}</p>
-      <p class="card-text"><strong>Phone: </strong> {{ record.phone }}</p>
-      <p class="card-text"><strong>Created At: </strong> {{ record.created_at }}</p>
+      <p class="card-text"><strong>Адрес: </strong> {{ record.address }}</p>
+      <p class="card-text"><strong>Город: </strong> {{ record.city }}</p>
+      <p class="card-text"><strong>Телефон: </strong> {{ record.phone }}</p>
+      <p class="card-text"><strong>Создан: </strong> {{ record.created_at }}</p>
     </div>
   </div>
 
-  <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
-  <a href="{% url 'delete_record' record.id %}" class="btn btn-danger">Delete</a>
-  <a href="{% url 'update_record' record.id %}" class="btn btn-success">Update</a>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Назад</a>
+  {% if user.is_superuser %}
+    <a href="{% url 'delete_record' record.id %}" class="btn btn-danger">Удалить</a>
+    <a href="{% url 'update_record' record.id %}" class="btn btn-success">Обновить</a>
+  {% endif %}
 {% endblock content %}

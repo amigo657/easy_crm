@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 
-{% block content %}
+{% block history %}
 
 <div class="col-md-6 offset-md-3">
-    <h1>Добавить клиента</h1>
-    <form action="{% url 'add_client' %}" method="post">
+    <h1>Добавить запись</h1>
+    <form action="{% url 'add_item' %}" method="post">
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit" class="btn btn-success">Добавить запись</button>
     </form>
     </div>
 
-{% endblock content %}
+{% endblock history %}
