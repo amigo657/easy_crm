@@ -2,11 +2,11 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
-from .models import Record
+from .models import Project
 
 
 def home(request):
-    records = Record.objects.all()
+    records = Project.objects.filter(status = 'На рассмотрении')
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -52,7 +52,7 @@ def register_user(request):
 
 def record(request, pk):
     if request.user.is_authenticated:
-        record = Record.objects.get(id=pk)
+        record = Project.objects.get(id=pk)
         return render(request, "record.html", {"record": record})
     else:
         messages.error(request, "Вы вошли в аккаунт")
@@ -61,7 +61,7 @@ def record(request, pk):
 
 def delete_record(request, pk):
     if request.user.is_authenticated:
-        del_record = Record.objects.get(id=pk)
+        del_record = Project.objects.get(id=pk)
         del_record.delete()
         messages.success(request, "Вы удалили запись")
         return redirect("home")
@@ -85,13 +85,18 @@ def add_record(request):
 
 def update_record(request, pk):
     if request.user.is_authenticated:
-        record = Record.objects.get(id=pk)
-        form = AddRecordForm(request.POST or None, instance=record)
-        if form.is_valid():
-            updated_record = form.save()
-            messages.success(request, f"Запись '{updated_record.first_name}' была обновлена")
-            return redirect("home")
-        return render(request, "update_record.html", {"form": form})
-    else:
-        messages.error(request, "You have to login")
+        record = Project.objects.get(id=pk)
+        record.status = 'В работе'
+        record.save() 
+        # form = AddRecordForm(request.POST or None, instance=record)
         return redirect("home")
+    else:
+        pass
+    #     if form.is_valid():
+    #         updated_record = form.save()
+    #         messages.success(request, f"Запись '{updated_record.first_name}' была обновлена")
+    #         return redirect("home")
+    #     return render(request, "update_record.html", {"form": form})
+    # else:
+    #     messages.error(request, "You have to login")
+    #     return redirect("home")

@@ -10,22 +10,22 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item">
-            <a class="nav-link"  href="{% url 'add_client'%}">Добавить нового пользователя</a>
+            <a class="nav-link"  href="{% url 'home'%}">Заказы</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  href="{% url 'view_history'%}">История продаж</a>
+            <a class="nav-link"  href="{% url 'view_history'%}">Проекты</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  href="{% url 'logout'%}">Logout</a>
+            <a class="nav-link"  href="{% url 'logout'%}">Выйти</a>
           </li>
             
             {% else%}
             <li class="nav-item">
-              <a class="nav-link"  href="{% url 'home'%}">Login</a>
+              <a class="nav-link"  href="{% url 'home'%}">Вход</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link"  href="{% url 'register'%}">Register</a>
+              <a class="nav-link"  href="{% url 'register'%}">Авторизация</a>
             </li>
 
             {% endif %}

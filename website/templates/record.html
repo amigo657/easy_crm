@@ -5,18 +5,19 @@
 <div class="card w-75 mb-3">
     <div class="card-body">
       <h5 class="card-title">{{ record.first_name }} {{ record.last_name }}</h5>
-      <p class="card-text"><strong>ID: </strong> {{ record.id }}</p>
+      <p class="card-text"><strong>Тема: </strong> {{ record.title }}</p>
+      <p class="card-text"><strong>Описание: </strong> {{ record.content }}</p>
+      <p class="card-text"><strong>Цена: </strong> {{ record.price }}$</p>
       <p class="card-text"><strong>Email: </strong> {{ record.email }}</p>
-      <p class="card-text"><strong>Адрес: </strong> {{ record.address }}</p>
-      <p class="card-text"><strong>Город: </strong> {{ record.city }}</p>
+      <p class="card-text"><strong>Город: </strong> {{ record.address }}</p>
       <p class="card-text"><strong>Телефон: </strong> {{ record.phone }}</p>
-      <p class="card-text"><strong>Создан: </strong> {{ record.created_at }}</p>
+      <p class="card-text"><strong>Создан: </strong> {{ record.created_at | date:'d-m-Y H:m' }}</p>
     </div>
-  </div>
+</div>
 
   <a href="{% url 'home' %}" class="btn btn-secondary">Назад</a>
   {% if user.is_superuser %}
     <a href="{% url 'delete_record' record.id %}" class="btn btn-danger">Удалить</a>
-    <a href="{% url 'update_record' record.id %}" class="btn btn-success">Обновить</a>
+    <a href="{% url 'update_record' record.id %}" class="btn btn-success">Начать проект</a>
   {% endif %}
 {% endblock content %}

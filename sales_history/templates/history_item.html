@@ -2,26 +2,50 @@
 
 
 {% block history %}
-<div class="card w-75 mb-3">
-    <div class="card-body">
-      <h5 class="card-title">{{ history.name }}</h5>
-      <p class="card-text"><strong>ID: </strong> {{ history.id }}</p>
-      <p class="card-text"><strong>Описание: </strong> {{ history.discription }}</p>
-      <p class="card-text"><strong>Информация: </strong> {{ history.information }}</p>
-      <p class="card-text"><strong>Цена: </strong> {{ history.coast }}</p>
-      <p class="card-text"><strong>Имя клиента: </strong> {{ history.client_first_name }}</p>
-      <p class="card-text"><strong>Фамилия клиента: </strong> {{ history.client_last_name }}</p>
-      <p class="card-text"><strong>Телефон клиента: </strong> {{ history.client_phone }}</p>
-      <p class="card-text"><strong>Имя менеджера: </strong> {{ history.user_first_name }}</p>
-      <p class="card-text"><strong>Фамилия менеджера: </strong> {{ history.user_last_name }}</p>
-      <p class="card-text"><strong>Телефон менеджера: </strong> {{ history.user_phone }}</p>
-      <p class="card-text"><strong>Отдел менеджера: </strong> {{ history.user_otdel }}</p>
-      <p class="card-text"><strong>Отдел менеджера: </strong> {{ history.created_at }}</p>
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-9">
+      <div class="col-md3">
+        <div class="col-9">
+          <div class="col-md3">
+            {% for step_name, step_value in steps %}
+            <a href="{% url 'change_item' pk=step_value %}" class="btn btn-primary">{{ step_name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card mx-auto w-75 text-center">
+          <div class="card-body">
+            <h5 class="card-title">{{ history.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ history.content }}</h6>
+            <p class="card-text">{{ history.created_at | date:'d-m-Y H:m' }}</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col">
+        {% for item in notes %}
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.content }}</p>
+            <p class="card-text">{{ item.user.username }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
   </div>
-  <a href="{% url 'view_history' %}" class="btn btn-secondary">Назад</a>
-  {% if user.is_superuser %}
-    <a href="{% url 'delete_item' history.id %}" class="btn btn-danger">Удалить</a>
-    <a href="{% url 'update_item' history.id %}" class="btn btn-success">Обновить</a>
-  {% endif %}
+</div>
 {% endblock history %}
